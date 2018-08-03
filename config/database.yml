@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  pool: 5
+  username: cement
+  password: cementITTG
+
+
+development:
+  <<: *default
+  database: makeown_development
+
+test:
+  <<: *default
+  database: makeown_test
+
+production:
+  <<: *default
+  database: makeown_production
+

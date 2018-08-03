@@ -1,0 +1,2 @@
+class SignedToOrdersController < ApplicationController
+end

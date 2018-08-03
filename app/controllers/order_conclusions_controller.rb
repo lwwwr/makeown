@@ -1,0 +1,2 @@
+class OrderConclusionsController < ApplicationController
+end
