@@ -12,5 +12,13 @@ Rails.application.routes.draw do
 
 
   end
+
+  resources :conversations, only: [:index, :create] do
+    member do
+      post :close
+    end
+    resources :messages, only: [:create]
+  end
+
   root to: 'pages#home'
  end

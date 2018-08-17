@@ -9,4 +9,7 @@ class User < ApplicationRecord
   has_many :orders
   has_many :order_conclusions, through: :user_reputations
   has_many :user_reputations
+
+  has_many :messages
+  has_many :conversations, foreign_key: :sender_id
 end
