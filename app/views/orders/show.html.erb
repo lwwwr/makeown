@@ -1,4 +1,44 @@
 <p id="notice"><%= notice %></p>
 
+<%= form_with scope: :order, url: order_path(@order), local: true do |form| %>
+
+    <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@order.errors.count, "error") %> prohibited
+            this article from being saved:
+          </h2>
+          <ul>
+            <% @order.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+<% end %>
+
+<br> <strong>Description:</strong> <%= @order.desc %>
+<br> <strong>Address:</strong> <%= @order.address %>
+<br>
+Test
+current user <%= current_user.id %>
+order owner <%= @order.user_id %>
+order id <%= @order.id %>
+<br>
+
+<strong>Готовы работать:</strong>
+<% @order.signed_to_orders.each do |signed| %>
+<%= render 'signed_person', signed: signed %>
+  <% end %>
+<br>
+<br>
+<%= render 'check_order' %>
+
+<% if @order.user_id == current_user.id %>
+<%= button_to "Сделать окончательный выбор", chosed_order_signed_to_order_path(@order), method: :post, class: 'btn btn-warning' %>
+<% end %>
+
 <%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Back', orders_path %> |
+<%= link_to 'Destroy',  order_path(@order), method: :delete %>

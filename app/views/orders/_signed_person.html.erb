@@ -1,0 +1,29 @@
+<div class="list-item">
+  <div class="list-item__user">
+    <div class="list-item__photo">
+    </div>
+    <p class="list-item__name"><%= User.find(signed.signed_id).user_info.fio %></p>
+    <div class="list-item__stars">
+      <%= User.find(signed.signed_id).user_info.user_id %>
+    </div>
+  </div>
+  <div class="list-item__left">
+    <p class="list-item__date">
+      <%= signed.created_at %>
+    </p>
+    <div class="list-item__flex">
+      <div class="list-item__main">
+        <h3>Мастер готов предложить</h3>
+        <p>Здарова, полупокер!</p>
+      </div>
+      <p class="price"><%= signed.price %> рублей </p>
+    </div>
+    <div class="list-footer__item">
+      <i class="far fa-clock"></i>
+      <span><%= ((Time.now - User.find(signed.signed_id).created_at) / 86400).to_i %></span>
+    </div>
+  <% if @order.user_id == current_user.id%>
+    <%= render 'set_or_unset', signed: signed %>
+<% end %>
+  </div>
+</div>

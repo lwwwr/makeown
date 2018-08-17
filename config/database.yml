@@ -3,8 +3,8 @@ default: &default
   encoding: unicode
   host: localhost
   pool: 5
-  username: cement
-  password: cementITTG
+  username: afadmin
+  password: afpassword
 
 
 development:

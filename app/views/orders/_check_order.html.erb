@@ -1,0 +1,9 @@
+<%- if @order.not_customer?(current_user) -%>
+
+    <%- if @order.signed?(current_user) -%>
+        <%= render 'unsubscribe_from_order', order: @order %>
+    <%- else -%>
+        <%= render 'subscribe_to_order', order: @order %>
+    <%- end -%>
+
+<%- end -%>

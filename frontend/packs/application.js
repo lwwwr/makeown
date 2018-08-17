@@ -7,13 +7,11 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import 'jquery';
-import 'jquery-ui';
-import 'jquery-ujs';
-import 'bootstrap';
-import './application.css';
-console.log('Hello World from Webpacker')
+import "jquery";
+import "jquery-ui";
+import "jquery-ujs";
+import "bootstrap";
+import "./application.css";
+console.log("Hello World from Webpacker");
 
-jQuery(document).ready(function() {
-
-});
+jQuery(document).ready(function() {});

@@ -4,7 +4,10 @@ class OrdersController < ApplicationController
   before_action :require_permission, only: [:edit, :update, :destroy]
 
   def index
-    @orders = Order.all
+    @orders = Order.all.where(chosed: nil)
+    #respond_to do |format|
+      #format.json { render json: @orders }
+      #end
   end
 
   def show
@@ -24,8 +27,10 @@ class OrdersController < ApplicationController
     @order = @user.orders.create(order_params)
     if @order.save
       redirect_to @order
+      flash[:success] = 'Successfully created!'
     else
       render 'new'
+      flash[:danger] = 'Something is going wrong!'
     end
   end
 
@@ -37,25 +42,29 @@ class OrdersController < ApplicationController
       flash[:success] = 'Order successfully updated'
     else
       render 'edit'
-      flash[:error] = 'Something is going wrong!'
+      flash[:danger] = 'Something is going wrong!'
     end
 
 
   end
 
   def destroy
-    @user = User.find(current_user)
-    @order = user.orders.find(params[:id])
+    #@user = User.find(current_user)
+    #@order = user.orders.find(params[:id])
+    @order = Order.find(params[:id])
     @order.destroy
+    redirect_to orders_path
   end
 
 
   private
 
   def require_permission
-    if current_user != Order.find(params[:id]).user_id
+    if current_user.id != Order.find(params[:id]).user_id
       redirect_to order_path
-      flash[:error] = 'You are not customer of this order!'
+      flash[:danger] = 'You are not customer of this order!'
+    else
+      flash[:success] = 'Successfully deleted!'
     end
   end
 

@@ -1,0 +1,5 @@
+<%= form_with(model: [ @order, @order.signed_to_orders.build ], local: true) do |f| %>
+    <%= text_field_tag :price %>
+    <%= hidden_field_tag :signed_id, current_user.id %>
+    <%= f.submit "Подписаться", class: 'button btn-success'  %>
+<% end %>

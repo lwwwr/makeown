@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_26_121536) do
+ActiveRecord::Schema.define(version: 2018_08_15_161951) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2018_07_26_121536) do
     t.datetime "end_data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "chosed"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
@@ -59,7 +60,7 @@ ActiveRecord::Schema.define(version: 2018_07_26_121536) do
     t.bigint "order_id"
     t.integer "signed_id"
     t.integer "price"
-    t.boolean "accepted"
+    t.boolean "accepted", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_signed_to_orders_on_order_id"
@@ -88,6 +89,15 @@ ActiveRecord::Schema.define(version: 2018_07_26_121536) do
     t.index ["user_id"], name: "index_user_infos_on_user_id"
   end
 
+  create_table "user_reputations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "order_conclusion_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_conclusion_id"], name: "index_user_reputations_on_order_conclusion_id"
+    t.index ["user_id"], name: "index_user_reputations_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -114,4 +124,6 @@ ActiveRecord::Schema.define(version: 2018_07_26_121536) do
   add_foreign_key "user_categories", "categories"
   add_foreign_key "user_categories", "users"
   add_foreign_key "user_infos", "users"
+  add_foreign_key "user_reputations", "order_conclusions"
+  add_foreign_key "user_reputations", "users"
 end

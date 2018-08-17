@@ -1,0 +1,15 @@
+<%- if @order.who != signed.signed_id  -%>
+
+    <div>
+      <%= button_to "Принять", accept_order_signed_to_order_path(@order), params: {signed_id: signed.signed_id} ,method: :post, class: 'btn btn-success' %>
+    </div>
+
+    <%- else -%>
+
+    <div>
+      <%= button_to "Отказаться", dismiss_order_signed_to_order_path(@order), method: :post, class: 'btn btn-danger' %>
+    </div>
+
+    <%- end -%>
+
+
